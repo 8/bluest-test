@@ -26,13 +26,20 @@ fn get_ble() -> () {
         while let Some(device) = block_on(scan.next()) {
           println!("Company: {}", device.adv_data.manufacturer_data.map(|m|format!("0x{:02X}", m.company_id)).as_deref().unwrap_or("unknown"));
           println!("Device: {}", device.device.name().as_deref().unwrap_or("unknown"));
+          println!("Rssi: {:?}", device.rssi);
           println!("Connectable: {}", device.adv_data.is_connectable);
           println!("Services: {:?}", device.adv_data.services);
 
           if let Ok(services) = block_on(device.device.discover_services()) {
             services.iter().for_each(|s| {
               let uuid = s.uuid();
-              println!("uuid: {}", uuid);
+              println!("service uuid: {}", uuid);
+              if let Ok(characteristics) = block_on(s.characteristics()) {
+                characteristics.iter().for_each(|c| {
+                  println!("\tcharacteristics uuid: {}", c.uuid());
+                });
+              }
+
             });
           }
 
