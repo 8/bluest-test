@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 bluest = "0.6.6"
 futures = "0.3.30"
-tokio = "1.36.0"
+tokio = {vesion = "1.36.0", features = ["full"] }
