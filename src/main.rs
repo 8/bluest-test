@@ -33,7 +33,7 @@ fn get_ble() -> () {
           println!("Company: {}", device.adv_data.manufacturer_data.map(|m|format!("0x{:02X}", m.company_id)).as_deref().unwrap_or("unknown"));
           println!("Device: {}", device.device.name().as_deref().unwrap_or("unknown"));
           println!("Rssi: {:?}", device.rssi);
-          println!("Connectable: {}", device.adv_data.is_connectable);
+          println!("Is Connectable: {}", device.adv_data.is_connectable);
           println!("Services: {:?}", device.adv_data.services);
 
           if let Ok(services) = block_on(device.device.discover_services()) {
