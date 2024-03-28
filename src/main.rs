@@ -9,6 +9,12 @@ use futures::{executor::block_on, StreamExt};
 
 // https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/
 
+// Company: 0xFF0C
+// Device: HR-70EC8EA6
+// Rssi: None
+// Connectable: true
+// Services: [0000180d-0000-1000-8000-00805f9b34fb]
+
 fn get_ble() -> () {
 
   let adapter = block_on(bluest::Adapter::default());
